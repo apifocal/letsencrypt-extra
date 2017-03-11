@@ -1,0 +1,68 @@
+#!/bin/bash -e
+#
+# Creates or updates a java keystore in the letsencrypt live directory of a certificate.
+# As a side effect you get a pkcs12 fullchain+key as well
+
+keytooldir=/usr/bin
+letsencryptdir=/etc/letsencrypt
+
+if [[ -z "$1" || -z "$2" ]] ; then
+  echo "usage: [sudo] $(basename $0) certname password"
+  exit 1
+fi
+
+cert="$1"
+password="$2"
+certdir=$letsencryptdir/live/$cert
+pkcs12store=$letsencryptdir/live/$cert/fullchain_and_key.p12
+keystore=$letsencryptdir/live/$cert/$cert.jks
+
+if [[ ! -d "$certdir" ]] ; then
+  echo "error: $certdir does not exist or not a directory"
+  exit 2
+fi
+
+if [ -f $keystore ] ; then
+  echo "removing alias root from keystore $keystore"
+  $keytooldir/keytool -delete \
+      -alias root \
+      -storepass "$password" \
+      -keystore $keystore
+  echo "removing alias $cert from keystore $keystore"
+  $keytooldir/keytool -delete \
+      -alias $cert \
+      -storepass "$password" \
+      -keystore $keystore
+fi
+
+
+echo "writing pcks12 store $pkcs12store using given password"
+openssl pkcs12 -export \
+    -in $certdir/fullchain.pem \
+    -inkey $certdir/privkey.pem \
+    -out $pkcs12store \
+    -name $cert \
+    -CAfile $certdir/chain.pem \
+    -caname root \
+    -password pass:"$password"
+
+echo "updating alias $cert in keystore $keystore with given password"
+$keytooldir/keytool -importkeystore \
+    -srcstorepass "$password" \
+    -deststorepass "$password" \
+    -destkeypass "$password" \
+    -srckeystore $pkcs12store \
+    -srcstoretype PKCS12 \
+    -alias $cert \
+    -keystore $keystore
+
+echo "updating alias root in keystore $keystore"
+$keytooldir/keytool -import \
+    -trustcacerts \
+    -alias root \
+    -deststorepass "$password" \
+    -file $certdir/chain.pem \
+    -noprompt \
+    -keystore $keystore
+
+echo "done"
