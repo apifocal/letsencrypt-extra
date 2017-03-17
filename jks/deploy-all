@@ -30,11 +30,11 @@ BEGIN {
     keystorepath = certdir "/" keystorefile
     
     printf("    - creating/updating\n")
-    cmd="./update-jks " cert " '" password "' " keystorepath
+    cmd="sudo ./update-jks " cert " '" password "' " keystorepath
     run(cmd)
     
     printf("    - uploading to %s into %s:%s as %s\n", host, container, targetpath, keystorefile)
-    cmd="tar cf - -C " certdir " -P " keystorefile \
+    cmd="sudo sh -c \"tar cf - -C " certdir " -P " keystorefile "\"" \
         " | ssh '" host "' \"docker cp - '" container ":" targetpath "'\""
     run(cmd)
 }
