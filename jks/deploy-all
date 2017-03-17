@@ -1,0 +1,50 @@
+#!/usr/bin/awk -f
+# 
+#
+BEGIN {
+    letsencryptdir="/etc/letsencrypt"
+    #dryrun=1
+    #letsencryptdir = "/home/cipi/letsencrypt"
+}
+
+/^#.*/     { next }
+(NF == 5)  {
+    cert = $1
+    password = $2
+    host = $3
+    container = $4
+    path = $5
+
+    printf("- %s\n", cert)
+
+    certdir = letsencryptdir "/live/" cert
+    if (match(path,"/[^/]+$")) {
+        # path ends with a filename
+        keystorefile = substr(path, RSTART+1, RLENGTH-1)
+        targetpath = substr(path, 0, RSTART)
+    } else {
+        # path ends with a /, thus representing a dirname
+        keystorefile = cert ".jks"
+        targetpath = path
+    }
+    keystorepath = certdir "/" keystorefile
+    
+    printf("    - creating/updating\n")
+    cmd="./update-jks " cert " '" password "' " keystorepath
+    run(cmd)
+    
+    printf("    - uploading to %s into %s:%s as %s\n", host, container, targetpath, keystorefile)
+    cmd="tar cf - -C " certdir " -P " keystorefile \
+        " | ssh '" host "' \"docker cp - '" container ":" targetpath "'\""
+    run(cmd)
+}
+
+END   {}
+
+function run ( command ) { 
+    if (dryrun) {
+         print("      - would run: " command);
+    } else {
+        while (command |& getline output) print "      " output
+    }
+}

@@ -1,0 +1,38 @@
+# Java Keystores deployment table
+#
+# Each line should contain the following fields, separated by tab/space.
+# There currently is no way to use tabs or spaces inside the value of a field.
+#
+# The default keystore filename is ${CERTNAME}.jks
+#
+# certificate		password		[user@]host		container on host		path[/filename] in container
+#
+
+# internal services
+
+ds1.apifocal.org	xxxxxxxxxxxxxxxx	h02.apifocal.org	ds1apifocalorg_apacheds_1	/var/lib/apacheds/ds1.apifocal.org.jks
+
+
+# silkmq - dev
+
+dg01.silkmq.org		xxxxxxxxxxxxxxxx	h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+dg02.silkmq.org		xxxxxxxxxxxxxxxx	h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+
+
+# silkmq - staging
+
+sg01.silkmq.org		xxxxxxxxxxxxxxxx	h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+sg02.silkmq.org		xxxxxxxxxxxxxxxx	h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+sg03.silkmq.org		xxxxxxxxxxxxxxxx	h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+
+
+# silkmq - production
+
+#g01.silkmq.org                                 h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+#g02.silkmq.org		                        h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+#g03.silkmq.org		                        h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+#g04.silkmq.org		                        h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+#g05.silkmq.org		                        h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+#g06.silkmq.org		                        h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+#g07.silkmq.org		                        h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
+#g08.silkmq.org		                        h04.apifocal.org	r-certs-nginx-1-3fdf4a93	/usr/share/nginx/html/
