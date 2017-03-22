@@ -1,0 +1,9 @@
+# API keys for rancher access
+#
+# Note: if the username:password field is missing, we'll use ~/.netrc
+#
+# codename  rancher-url					rancher-env-id	[username:password]
+#
+stage	    https://rancher.stage.apifocal.org		1a5		xxxxxxxxxxxxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+internal    https://rancher.internal.apifocal.org	1a5		xxxxxxxxxxxxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+production  https://rancher.apifocal.org		1a5		xxxxxxxxxxxxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
