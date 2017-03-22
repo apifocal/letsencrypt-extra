@@ -2,7 +2,7 @@
 
 CERTNAME="$1"
 CODENAME="$2"
-COOKIE="$3"
+APIKEY="$3"
 CERTID="$4"
 
 # TODO: better API (e.g. paste URL from brower towards both rancher and its environment, perhaps? e.g. https://rancher.internal.apifocal.org/env/1a5/infra/certificates)
@@ -10,11 +10,11 @@ CERTID="$4"
 # TODO: automatically detect if we want to create or update an existing certificate
 
 if [[ $# -ne 3 && $# -ne 4 ]] ; then
-  echo "usage: $(basename $0) <cert-name> <codename> <token-cookie> [<cert-id>]"
+  echo "usage: $(basename $0) <cert-name> <codename> <apikey> [<cert-id>]"
   echo "  - codename = rancher server codename"
-  echo "  - token-cookie = get this from browser developer tools" 
-  echo "sample create: $(basename $0) archiva.apifocal.org internal somecookie"
-  echo "sample update: $(basename $0) archiva.apifocal.org internal somecookie 1c4"
+  echo "  - apikey = rancher api key in the form username:password" 
+  echo "sample create: $(basename $0) archiva.apifocal.org internal USERNAME:PASSWORD"
+  echo "sample update: $(basename $0) archiva.apifocal.org internal USERNAME:PASSWORD 1c4"
   exit 1
 fi
 
@@ -22,6 +22,7 @@ set -e
 set -u
 
 LETSENCRYPT_DIR=/etc/letsencrypt
+#LETSENCRYPT_DIR=/home/cipi/letsencrypt
 CERTDIR="${LETSENCRYPT_DIR}/live/${CERTNAME}"
 
 case ${CODENAME} in
@@ -64,9 +65,9 @@ _EOF
 
 if [ -z "${CERTID}" ] ; then
     # create new certificate
-    curl -b "token=${COOKIE}" -X POST -H 'Content-Type: application/json' -d "${CERT_JSON}" "${RANCHER_URL}/v1/projects/${PROJECT_ID}/certificates"
+    curl -u "${APIKEY}" -X POST -H 'Content-Type: application/json' -d "${CERT_JSON}" "${RANCHER_URL}/v1/projects/${PROJECT_ID}/certificates"
 else
     # update existing certificate
-    curl -b "token=${COOKIE}" -X PUT -H 'Content-Type: application/json' -d "${CERT_JSON}" "${RANCHER_URL}/v1/projects/${PROJECT_ID}/certificates/${CERTID}"
+    curl -u "${APIKEY}" -X PUT -H 'Content-Type: application/json' -d "${CERT_JSON}" "${RANCHER_URL}/v1/projects/${PROJECT_ID}/certificates/${CERTID}"
 fi
 
