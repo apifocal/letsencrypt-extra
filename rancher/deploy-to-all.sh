@@ -1,18 +1,23 @@
 #!/bin/bash
 
 CERTNAME="$1"
-ENVTAB="${2:-./envtab}"
+ENVTAB="${HOME}/.envtab"
 
 #LETSENCRYPT_DIR=/etc/letsencrypt
 LETSENCRYPT_DIR=/home/cipi/letsencrypt
 
 if [ -z "${CERTNAME}" ] ; then
-    echo "usage: $(basename $0) <certname> [<envtab>]"
+    echo "usage: $(basename $0) <certname>"
     exit 1
 fi
 
 if ! whereis jq > /dev/null ; then
     echo "this program needs jq (https://stedolan.github.io/jq/) installed"
+    exit 1
+fi
+
+if ! -f ${ENVTAB} ; then
+    echo "${ENVTAB} missng. please create it"
     exit 1
 fi
 
