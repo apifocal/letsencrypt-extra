@@ -28,6 +28,15 @@ if [ ! -r "${ENVTAB}" ] ; then
     exit 1
 fi
 
+read -r CODENAME RANCHER_URL PROJECT_ID APIKEY < <(grep "^${ENVIRONMENT}\s" "${ENVTAB}")
+[ -z "$CODENAME" ] && { echo "environment ${ENVIRONMENT} not found"; exit 1; }
+[ -z "$RANCHER_URL" ] && { echo "environment ${ENVIRONMENT} not found"; exit 1; }
+[ -z "$PROJECT_ID" ] && { echo "environment ${ENVIRONMENT} not found"; exit 1; }
+
+[ "$CODENAME" != "$ENVIRONMENT" ] && { echo "CODENAME $CODENAME != ENVIRONMENT $ENVIRONMENT"; exit 1; }
+
+[ -z "$APIKEY" ] && CURL_AUTH="--netrc" || CURL_AUTH="-u ${APIKEY}"
+
 
 set -e
 set -u
@@ -53,16 +62,6 @@ CERT_JSON=$(cat << _EOF | tr --delete '\n'
 _EOF
 )
 
-
-grep "^${ENVIRONMENT}\s" | read -r CODENAME RANCHER_URL PROJECT_ID APIKEY
-[[ -z "$CODENAME" ]] && continue
-[[ -z "$RANCHER_URL" ]] && continue
-[[ -z "$PROJECT_ID" ]] && continue
-
-# only parse the environment we need
-[[ "$CODENAME" != "$ENVIRONMENT" ]] && continue
-
-[[ -z "$APIKEY" ]] && CURL_AUTH="--netrc" || CURL_AUTH="-u ${APIKEY}"
 
 RANCHER_CERTS_URL="${RANCHER_URL}/v1/projects/${PROJECT_ID}/certificates"
 JQ_FILTER=".data[] | select(.CN==\"${CERTNAME}\") | .id"

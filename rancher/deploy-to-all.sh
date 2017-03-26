@@ -47,7 +47,7 @@ _EOF
 )
 
 
-while read -r CODENAME RANCHER_URL PROJECT_ID APIKEY ; do
+while read -r CODENAME RANCHER_URL PROJECT_ID APIKEY < "${ENVTAB}" ; do
     [[ "$CODENAME" =~ ^#.*$ ]] && continue
     [[ -z "$CODENAME" ]] && continue
     [[ -z "$RANCHER_URL" ]] && continue
