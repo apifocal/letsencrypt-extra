@@ -4,8 +4,7 @@ COMMAND="$1"
 CERTNAME="$2"
 ENVIRONMENT="$3"
 
-#LETSENCRYPT_DIR=/etc/letsencrypt
-LETSENCRYPT_DIR=/home/cipi/letsencrypt
+LETSENCRYPT_DIR=/etc/letsencrypt
 ENVTAB="${HOME}/.envtab"
 
 ARGS=good
@@ -24,7 +23,7 @@ if ! whereis jq > /dev/null ; then
     exit 1
 fi
 
-if ! -f ${ENVTAB} ; then
+if [ ! -r "${ENVTAB}" ] ; then
     echo "${ENVTAB} missng. please create it"
     exit 1
 fi

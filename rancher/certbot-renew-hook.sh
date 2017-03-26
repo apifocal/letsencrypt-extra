@@ -2,9 +2,7 @@
 
 CERTNAME="${RENEWED_LINEAGE##*/live/}"
 ENVTAB="${HOME}/.envtab"
-
 LETSENCRYPT_DIR=/etc/letsencrypt
-#LETSENCRYPT_DIR=/home/cipi/letsencrypt
 
 echo "CERTNAME=${CERTNAME}"
 echo "ENVTAB=${ENVTAB}"
@@ -22,8 +20,8 @@ if ! whereis jq > /dev/null ; then
     exit 1
 fi
 
-if ! -f ${ENVTAB} ; then
-    echo "${ENVTAB} missng. please create it"
+if [ ! -r "${ENVTAB}" ] ; then
+    echo "${ENVTAB} missing. please create it"
     exit 1
 fi
 
