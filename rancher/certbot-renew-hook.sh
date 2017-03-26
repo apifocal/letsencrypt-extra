@@ -1,15 +1,16 @@
 #!/bin/bash
 
-CERTNAME="${RENEWED_LINEAGE##.*/}"
+CERTNAME="${RENEWED_LINEAGE##*/live/}"
 ENVTAB="${HOME}/.envtab"
 
 LETSENCRYPT_DIR=/etc/letsencrypt
 #LETSENCRYPT_DIR=/home/cipi/letsencrypt
 
-echo "RENEWED_LINEAGE=${RENEWED_LINEAGE}"
 echo "CERTNAME=${CERTNAME}"
 echo "ENVTAB=${ENVTAB}"
 echo "LETSENCRYPT_DIR=${LETSENCRYPT_DIR}"
+echo "RENEWED_LINEAGE=${RENEWED_LINEAGE}"
+echo "RENEWED_DOMAINS=${RENEWED_DOMAINS}"
 
 if [ -z "${CERTNAME}" ] ; then
     echo "CERTNAME missing; exiting"
