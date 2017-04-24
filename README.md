@@ -1,5 +1,11 @@
 # Letsencrypt automation
 
+## certbot-auto with DNS challenge on GoDaddy
+
+TODO: replace sample with documentation
+
+    cipi@chicago:~/src/certbot$ ./certbot-auto certonly --manual --preferred-challenges dns-01 -d es2.dev.silkmq.org --manual-auth-hook ~/src/letsencrypt-extra/godaddy/authenticator.sh --manual-public-ip-logging-ok
+
 ## Java keystores
 
 You have to set up SSH access to all infra hosts with appropriate private keys first.
