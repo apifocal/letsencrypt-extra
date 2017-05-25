@@ -5,6 +5,7 @@ BEGIN {
     letsencryptdir="/etc/letsencrypt"
     #dryrun=1
     #letsencryptdir = "/home/cipi/letsencrypt"
+    identityfile = "$HOME/.ssh/id_rsa"
 }
 
 /^#.*/     { next }
@@ -35,7 +36,7 @@ BEGIN {
     
     printf("    - uploading to %s into %s:%s as %s\n", host, container, targetpath, keystorefile)
     cmd="sudo sh -c \"tar cf - -C " certdir " -P " keystorefile "\"" \
-        " | ssh '" host "' \"docker cp - '" container ":" targetpath "'\""
+        " | ssh -i " identityfile " '" host "' \"docker cp - '" container ":" targetpath "'\""
     run(cmd)
 }
 
