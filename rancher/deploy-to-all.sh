@@ -3,8 +3,8 @@
 CERTNAME="$1"
 ENVTAB="${HOME}/.envtab"
 
-#LETSENCRYPT_DIR=/etc/letsencrypt
-LETSENCRYPT_DIR=/home/cipi/letsencrypt
+LETSENCRYPT_DIR=/etc/letsencrypt
+#LETSENCRYPT_DIR=/home/cipi/letsencrypt
 
 if [ -z "${CERTNAME}" ] ; then
     echo "usage: $(basename $0) <certname>"
