@@ -1,0 +1,52 @@
+apifocal.com			443
+archiva.apifocal.org		443
+blog.apifocal.com		443
+cdn.apifocal.org		443
+dev.silkmq.org			443
+dg01.silkmq.org			61917
+#dg02.silkmq.org		61917
+docker.apifocal.org		443
+docker-tmp.apifocal.org		443
+#docs.apifocal.com		443
+docs.silkmq.com			443
+ds1.apifocal.org		636
+es2.dev.silkmq.org		443
+es2.stage.silkmq.org		443
+g01.silkmq.com			61617
+g02.silkmq.com			61617
+g03.silkmq.com			61617
+#g04.silkmq.com			61617
+#g05.silkmq.com			61617
+#g06.silkmq.com			61617
+#g07.silkmq.com			61617
+#g08.silkmq.com			61617
+git.apifocal.org		443
+#h03.apifocal.org
+#h04.apifocal.org
+#h07.apifocal.org
+#h08.apifocal.org
+#h10.apifocal.org
+jenkins.apifocal.org		443
+kibana.dev.silkmq.org		443
+kibana.stage.silkmq.org		443
+kopf.es2.dev.silkmq.org		443
+kopf.es2.stage.silkmq.org	443
+ldap.stage.silkmq.org		636
+logs.apifocal.org		443
+#miami.silkmq.com
+monitor.apifocal.org		443
+mqs.dev.silkmq.org		61919
+mqs.silkmq.com			61619
+mqs.stage.silkmq.org		61619
+rancher.apifocal.org		443
+rancher.internal.apifocal.org	443
+rancher.stage.apifocal.org	443
+redmine.apifocal.org		443
+sg01.silkmq.org			61617
+sg02.silkmq.org			61617
+#sg03.silkmq.org		61617
+silkmq.com			443
+stage.apifocal.com		443
+stage.silkmq.org		443
+www.silkmq.com			443
+www.silkmq.org			443
