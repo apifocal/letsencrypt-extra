@@ -1,52 +1,90 @@
-apifocal.com			443
+# internal services
+
+ds1.apifocal.org		636
+
+# ranchers
+rancher.apifocal.org		443
+rancher.internal.apifocal.org	443
+rancher.stage.apifocal.org	443
+
+# dev(ops) services
 archiva.apifocal.org		443
-blog.apifocal.com		443
-cdn.apifocal.org		443
-dev.silkmq.org			443
-dg01.silkmq.org			61917
-#dg02.silkmq.org		61917
 docker.apifocal.org		443
 docker-tmp.apifocal.org		443
+git.apifocal.org		443
+jenkins.apifocal.org		443
+logs.apifocal.org		443
+monitor.apifocal.org		443
+redmine.apifocal.org		443
+
+# points to cipi's host, expired cetificate
+cdn.apifocal.org		443
+# no dns entry, cleanup certificate
+#miami.silkmq.com		443
+
+# site
+apifocal.com			443
+stage.apifocal.com		443
+blog.apifocal.com		443
+# currently a http redirect too google drive, fix https
 #docs.apifocal.com		443
-docs.silkmq.com			443
-ds1.apifocal.org		636
+
+# github site, fix https
+www.silkmq.org			443
+
+# SILKMQ
+
+# dev frontends
+dev.silkmq.org			443
+kibana.dev.silkmq.org		443
+kopf.es2.dev.silkmq.org		443
 es2.dev.silkmq.org		443
+
+# stage frontends
+stage.silkmq.org		443
+kibana.stage.silkmq.org		443
+kopf.es2.stage.silkmq.org	443
 es2.stage.silkmq.org		443
+
+# stage ldap
+ldap.stage.silkmq.org		636
+
+# prod frontends
+silkmq.com			443
+www.silkmq.com			443
+docs.silkmq.com			443
+
+# discovery brokers
+mqs.dev.silkmq.org		61919
+mqs.silkmq.com			61619
+mqs.stage.silkmq.org		61619
+
+# dev gateway brokers
+dg01.silkmq.org			61917
+# pints to hadrian.us, fix dns
+dg02.silkmq.org			61917
+h03.apifocal.org		61917
+h04.apifocal.org		61917
+
+# stage gateway brokers
+sg01.silkmq.org			61617
+# both sg01 and sg02 points to h03, fix DNS
+sg02.silkmq.org			61617
+# points to h04 but no staging gateway config on h04
+sg03.silkmq.org			61617
+h03.apifocal.org		61617
+h04.apifocal.org		61617
+
+# prod gateway brokers
 g01.silkmq.com			61617
 g02.silkmq.com			61617
 g03.silkmq.com			61617
+# no dns entry, cleanup certificate
 #g04.silkmq.com			61617
 #g05.silkmq.com			61617
 #g06.silkmq.com			61617
 #g07.silkmq.com			61617
 #g08.silkmq.com			61617
-git.apifocal.org		443
-#h03.apifocal.org
-#h04.apifocal.org
-#h07.apifocal.org
-#h08.apifocal.org
-#h10.apifocal.org
-jenkins.apifocal.org		443
-kibana.dev.silkmq.org		443
-kibana.stage.silkmq.org		443
-kopf.es2.dev.silkmq.org		443
-kopf.es2.stage.silkmq.org	443
-ldap.stage.silkmq.org		636
-logs.apifocal.org		443
-#miami.silkmq.com
-monitor.apifocal.org		443
-mqs.dev.silkmq.org		61919
-mqs.silkmq.com			61619
-mqs.stage.silkmq.org		61619
-rancher.apifocal.org		443
-rancher.internal.apifocal.org	443
-rancher.stage.apifocal.org	443
-redmine.apifocal.org		443
-sg01.silkmq.org			61617
-sg02.silkmq.org			61617
-#sg03.silkmq.org		61617
-silkmq.com			443
-stage.apifocal.com		443
-stage.silkmq.org		443
-www.silkmq.com			443
-www.silkmq.org			443
+h07.apifocal.org		61617
+h08.apifocal.org		61617
+h10.apifocal.org		61617
