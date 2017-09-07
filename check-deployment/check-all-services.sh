@@ -16,7 +16,7 @@ END   {}
 
 function run ( command ) {
     if (dryrun) {
-         print("      - would run: " command);
+	print("      - would run: " command);
     } else {
         while (command |& getline output) print output
     }
