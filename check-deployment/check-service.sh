@@ -60,6 +60,12 @@ echo -n | \
 	    echo "${service_name}:${service_port} is ${status_message}"
 	else
 	    # status mapping: 0 - service OK, 1 - service down, 2 - service up but expired certificate, 3 - service up,certificate valid, but name does not match alternative names
-	    echo tls_verify,host=${service_name},port=${service_port} seconds_from_valid=$(($now_seconds - $from_seconds)),seconds_to_expire=$(($to_seconds - $now_seconds)),status=$status
+	    if [ $status -eq 1 ]
+	    then
+		# since the service is down send only the status
+		echo tls_verify,host=${service_name},port=${service_port} status=$status
+	    else
+		echo tls_verify,host=${service_name},port=${service_port} seconds_from_valid=$(($now_seconds - $from_seconds)),seconds_to_expire=$(($to_seconds - $now_seconds)),status=$status
+	    fi
 	fi
     }
