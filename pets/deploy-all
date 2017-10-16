@@ -1,0 +1,38 @@
+#!/usr/bin/awk -f
+#
+#
+BEGIN {
+    letsencryptdir="/etc/letsencrypt"
+    #dryrun=1
+    identityfile = "$HOME/.ssh/id_rsa"
+    reload_column = 4
+}
+
+/^#.*/     { next }
+(NF >= reload_column)  {
+    cert = $1
+    host = $2
+    path = $3
+    # the rest of the columns is the reload command
+    reload_cmd = ""
+    for(i = reload_column; i <= NF; i++) {
+        reload_cmd = reload_cmd " " $i
+    }
+
+    printf("- %s\n", cert)
+
+    printf("    - uploading to %s into %s, then running %s\n", host, path, reload_cmd)
+    cmd="sudo sh -c \"tar cpfh - -C " letsencryptdir "/live/ -P " cert "\"" \
+        " | ssh -i " identityfile " '" host "' \"sudo tar xpf - -C " path " -P\ &&" reload_cmd "\""
+    run(cmd)
+}
+
+END   {}
+
+function run ( command ) {
+    if (dryrun) {
+         print("      - would run: " command);
+    } else {
+        while (command |& getline output) print "      " output
+    }
+}

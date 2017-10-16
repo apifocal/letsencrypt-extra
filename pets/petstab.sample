@@ -1,0 +1,10 @@
+# Pet service certificate deployment table
+#
+# Each line should contain the following fields, separated by tab/space.
+# There currently is no way to use tabs or spaces inside the value of a field
+# except the reload command.
+#
+# certificate name		[user@]host		path on host				reload command
+#
+
+service.acme.com		host.acme.org		/etc/ssl				sudo service apache2 reload
