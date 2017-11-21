@@ -1,1 +1,1 @@
-sudo ./certbot-auto renew --renew-hook ~/src/letsencrypt-extra/rancher/certbot-renew-hook.sh --preferred-challenges dns-01 --manual --manual-auth-hook ~/src/letsencrypt-extra/godaddy/authenticator.sh --manual-public-ip-logging-ok
+sudo ./certbot-auto renew --renew-hook ~/src/letsencrypt-extra/rancher/certbot-renew-hook.sh --renew-hook ~/src/letsencrypt-extra/jks/certbot-renew-hook.sh --preferred-challenges dns-01 --manual --manual-auth-hook ~/src/letsencrypt-extra/godaddy/authenticator.sh --manual-public-ip-logging-ok
