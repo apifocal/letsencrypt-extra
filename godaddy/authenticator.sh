@@ -37,4 +37,4 @@ curl -s -X PUT "https://api.godaddy.com/v1/domains/${DOMAIN}/records/TXT/$RECORD
 
 
 # Sleep to make sure the change has time to propagate over to DNS
-sleep 1
+sleep 60
