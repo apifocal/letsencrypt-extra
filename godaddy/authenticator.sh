@@ -32,7 +32,7 @@ fi
 curl -s -X PUT "https://api.godaddy.com/v1/domains/${DOMAIN}/records/TXT/$RECORD_NAME" \
      -H "Authorization: sso-key ${API_KEY}" ${SHOPPER_HEADER} \
      -H "Content-Type: application/json" \
-     --data '{"type":"TXT","name":"'"$RECORD_NAME"'","data":"'"$CERTBOT_VALIDATION"'","ttl":600}' \
+     --data '[{"type":"TXT","data":"'"$CERTBOT_VALIDATION"'","ttl":600}]' \
    | jq .
 
 
